@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Form = ({input, city, setCity, setInput}) => {
+const Form = ({input, setCity, setInput}) => {
     
     const changeCity = (e) => {
         e.preventDefault()

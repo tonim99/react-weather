@@ -11,8 +11,7 @@ const CurrentWeather = ({ weather, conditions, icon }) => {
             </div>}
             {conditions && <div className='conditions-main'>
                 <h4>Conditions: {conditions.description}</h4>
-                {console.log('icon- ', icon)}
-                <img className='icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`}/>
+                <img className='weather-icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`}/>
             </div>}
         </div>
         
