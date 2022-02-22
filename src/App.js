@@ -1,6 +1,4 @@
 import React from 'react';
-// import WeatherAPI from './api/Weather';
-// import Form from './components/Form'
 import Weather from './api/Weather'
 import './App.css';
 

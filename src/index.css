@@ -1,5 +1,13 @@
+:root {
+  --main-bg-color: #1d1341;
+  --main-text-color: #FAF9F6;
+  --secondary-bg-color: #54416d;
+  --main-button-color: 	#8fe0ff;
+}
+
 body {
   margin: 0;
+  height: 100vh;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

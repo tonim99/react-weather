@@ -1,7 +1,9 @@
+/*makes API call from openweathermap and passes props to children */
+
 import React, {useEffect, useState} from 'react'
 import CurrentWeather from '../components/CurrentWeather'
 import Form from '../components/Form'
-
+import './Weather.css';
 const Weather = () => {
     const [weather, setWeather] = useState({})
     const [input, setInput] = useState('London')
@@ -16,7 +18,6 @@ const Weather = () => {
             try {
                 let result = await fetch(url)
                 let data = await result.json()
-                console.log('data- ', data)
                 setWeather(data.list[0].main)
                 setConditions(data.list[0].weather[0])
                 setIcon(data.list[0].weather[0].icon)
@@ -28,8 +29,9 @@ const Weather = () => {
     
         fetchWeather()
     }, [city])
+
     return(
-        <div>
+        <div className='weather-box'>
             <h3>Please enter your city</h3>
             <Form 
                 input={input}

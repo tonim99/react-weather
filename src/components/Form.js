@@ -1,6 +1,7 @@
+/* handles form input and sets selected city*/
 import React from 'react'
-
-const Form = ({input, setCity, setInput}) => {
+import './Form.css';
+const Form = ({ input, setCity, setInput }) => {
     
     const changeCity = (e) => {
         e.preventDefault()
