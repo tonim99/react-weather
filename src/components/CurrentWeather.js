@@ -5,11 +5,11 @@ const CurrentWeather = ({ weather, conditions, icon }) => {
     
     return(
         <div>
-            {weather && <div className='weather-main'>
+            {weather && <div>
                 <h4>Temperature: {Math.round(weather.temp)} <span>&#176;</span></h4>
                 <h5>Feels Like: {Math.round(weather.feels_like)} <span>&#176;</span></h5>
             </div>}
-            {conditions && <div className='conditions-main'>
+            {conditions && <div>
                 <h4>Conditions: {conditions.description}</h4>
                 {icon && <img className='weather-icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`}/>}
             </div>}

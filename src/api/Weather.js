@@ -5,6 +5,7 @@ import CurrentWeather from '../components/CurrentWeather'
 import Form from '../components/Form'
 import './Weather.css';
 const Weather = () => {
+    
     const [weather, setWeather] = useState({})
     const [input, setInput] = useState('London')
     const [city, setCity] = useState('London')

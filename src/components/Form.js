@@ -11,7 +11,6 @@ const Form = ({ input, setCity, setInput }) => {
     return(
         <form onSubmit={(e) => changeCity(e)}>
             <input 
-                className='city-input'
                 type='text'
                 value={input}
                 name='city'
