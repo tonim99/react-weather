@@ -12,7 +12,7 @@ input {
 
 button {
     background-color: var(--main-button-color);
-    color: #180e38;
+    color: var(--text-color-dark);
     font-weight: bold;
     font-size: 16px;
     letter-spacing: 1px;

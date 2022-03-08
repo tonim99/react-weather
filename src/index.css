@@ -1,8 +1,10 @@
 :root {
-  --main-bg-color: #1d1341;
-  --main-text-color: #FAF9F6;
+  --main-bg-color: #130932;
+  --text-color-light: #FAF9F6;
+  --text-color-dark: #180e38;
   --secondary-bg-color: #54416d;
   --main-button-color: 	#8fe0ff;
+  --gradient-primary: linear-gradient(140deg, #54416d 0%, #2b235a 45%, #31255a 100%);
 }
 
 body {
