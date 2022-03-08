@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 
 
 
-const Weather7Day = ( { weather7Day }) => {
+const Weather7Day = ({ weather7Day }) => {
     console.log('Weather7Day from component', weather7Day)
     // const [dayTime, setDayTime] = useState('')
     const dayTime = weather7Day && weather7Day.map((day) => {

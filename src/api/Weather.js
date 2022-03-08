@@ -12,11 +12,11 @@ const Weather = () => {
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
     const [city, setCity] = useState('')
-    const [conditions, setConditions] = useState([])
-    const [icon, setIcon] = useState([])
+    const [conditions, setConditions] = useState('')
+    const [icon, setIcon] = useState('')
     const [input, setInput] = useState('')
     const [weather, setWeather] = useState('--')
-    const [weather7Day, setWeather7Day] = useState()
+    const [weather7Day, setWeather7Day] = useState([])
   
     const APIKey = process.env.REACT_APP_API_KEY;
     const baseUrl = 'http://api.openweathermap.org';
@@ -46,13 +46,14 @@ const Weather = () => {
             })
             .catch(err =>  console.error(err))
     }
-    console.log(weather7Day, "**weather7Day")
+    
     useEffect(() => {
         console.log('***use effect 1 fired***')
             fetchLatLon()
     }, [zip])
 
     useEffect(() => {
+        console.log('***use effect 2 fired***')
         fetchWeather()
     }, [city])
 
