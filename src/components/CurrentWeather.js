@@ -2,7 +2,7 @@
 import React from 'react'
 import './CurrentWeather.css'
 const CurrentWeather = ({ weather, conditions, icon }) => {
-    
+    console.log('***weather***', weather)
     return(
         <div>
             {weather && <div>
@@ -10,7 +10,7 @@ const CurrentWeather = ({ weather, conditions, icon }) => {
                 <h5>Feels Like: {Math.round(weather.feels_like)} <span>&#176;</span></h5>
             </div>}
             {conditions && <div>
-                <h4>Conditions: {conditions.description}</h4>
+                <h4>Conditions: {conditions}</h4>
                 {icon && <img className='weather-icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`}/>}
             </div>}
         </div>

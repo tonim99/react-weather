@@ -1,19 +1,19 @@
-/* handles form input and sets selected city*/
+/* handles form input and sets selected city */
 import React from 'react'
 import './Form.css';
-const Form = ({ input, setCity, setInput }) => {
-    
-    const changeCity = (e) => {
+const Form = ({ setZip, input, setInput }) => {
+
+    const changeZip = (e) => {
         e.preventDefault()
-        setCity(input)
+        setZip(input)
     }
     
     return(
-        <form onSubmit={(e) => changeCity(e)}>
+        <form onSubmit={(e) => changeZip(e)}>
             <input 
                 type='text'
                 value={input}
-                name='city'
+                name='zip'
                 onChange={(e) => setInput(e.target.value)}
             />
             <button type='submit'>Submit</button>
