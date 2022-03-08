@@ -59,7 +59,7 @@ const Weather = () => {
 
     return(
         <div className='weather-box'>
-            <h3>Please enter your zip code</h3>
+            <h2>Please enter your zip code</h2>
             <Form 
                 setZip={setZip}
                 input={input}

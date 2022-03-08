@@ -1,6 +1,8 @@
 .weather-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--main-bg-color);
-    margin: 30px;
     padding: 40px;
     border: 2px solid var(--text-color-light);
     border-radius: 5px;
@@ -8,6 +10,6 @@
 
 }
 
-h3 {
-    font-size: 24px;
+h2 {
+    margin-top: 0;
 }
