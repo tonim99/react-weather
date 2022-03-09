@@ -15,7 +15,7 @@ const Weather = () => {
     const [conditions, setConditions] = useState('')
     const [icon, setIcon] = useState('')
     const [input, setInput] = useState('')
-    const [weather, setWeather] = useState('--')
+    const [weather, setWeather] = useState('')
     const [weather7Day, setWeather7Day] = useState([])
   
     const APIKey = process.env.REACT_APP_API_KEY;
@@ -59,7 +59,6 @@ const Weather = () => {
 
     return(
         <div className='weather-box'>
-            <h2>Please enter your zip code</h2>
             <Form 
                 setZip={setZip}
                 input={input}
