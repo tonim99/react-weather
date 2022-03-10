@@ -1,14 +1,17 @@
 import React from 'react'
 import Form from './Form'
 import './NavBar.css'
-const NavBar = () => {
+const NavBar = ({ setZip, input, setInput }) => {
 
     return (
-     <nav>
-        Nav Bar
-        {/* <Form /> */}
-    </nav>
+        <nav>
+            <Form 
+                setZip={setZip}
+                input={input}
+                setInput={setInput}
+            />
+        </nav>
     )
-        
 }
+
 export default NavBar

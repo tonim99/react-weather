@@ -1,9 +1,8 @@
 /* Makes API calls to openweather map One Call API and Geocoding API and passes props to children */
 
-
 import React, { useEffect, useState } from 'react'
 import CurrentWeather from '../components/CurrentWeather'
-import Form from '../components/Form'
+import NavBar from '../components/NavBar'
 import Weather7Day from '../components/Weather7Day';
 import './Weather.css';
 
@@ -21,7 +20,6 @@ const Weather = () => {
     const APIKey = process.env.REACT_APP_API_KEY;
     const baseUrl = 'http://api.openweathermap.org';
    
-
     const fetchLatLon = () => {
         fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
             .then(res => res.json())
@@ -58,21 +56,30 @@ const Weather = () => {
     }, [city])
 
     return(
-        <div className='weather-box'>
-            <Form 
+        <div className='weather-container'>
+            <NavBar 
                 setZip={setZip}
                 input={input}
                 setInput={setInput}
             />
-            <CurrentWeather 
-                city={city}
-                weather={weather}
-                conditions={conditions}
-                icon={icon}
-            />
-            <Weather7Day weather7Day={weather7Day}/>
+            <div className='current-weather-container'>
+                <h1>Your Current Local Weather</h1>
+                <CurrentWeather 
+                    city={city}
+                    weather={weather}
+                    conditions={conditions}
+                    icon={icon}
+                />
+            </div>
+            <div className="7-day-weather">
+                <Weather7Day weather7Day={weather7Day}/>
+            </div>
         </div>
     )
 }
 
 export default Weather
+
+
+           
+                

@@ -4,7 +4,10 @@
 */
 
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './Form.css';
+
 const Form = ({ setZip, input, setInput }) => {
 
     const changeZip = (e) => {
@@ -29,16 +32,18 @@ const Form = ({ setZip, input, setInput }) => {
 
     return(
         <form onSubmit={(e) => changeZip(e)}>
-            <input 
-                type='text'
-                value={input}
-                name='zip'
-                placeholder='Search Zip Code'
-                onChange={(e) => setInput(e.target.value)}
-            />
-            <button type='submit'>
-                Submit
-            </button>
+            <div className="input-container">
+                <input 
+                    type='text'
+                    value={input}
+                    name='zip'
+                    placeholder='Search Zip Code'
+                    onChange={(e) => setInput(e.target.value)}
+                />
+                <button type='submit'>
+                    <FontAwesomeIcon icon={faSearch} rotation={90} />
+                </button>
+            </div>
         </form>
     )
 }

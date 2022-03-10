@@ -1,21 +1,68 @@
 form {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
 }
 
 input {
     font-size: 16px;
-    padding: 5px;
-    margin-bottom: 5px;
-    border-radius: 10px;
+    padding: 4px 20px;
+    color: var(--text-color-light);
+    background-color: var(--secondary-bg-color);
+    border-style: hidden;
+    text-align: center;
+}
+
+input:focus {
+    outline: none;
+}
+
+::placeholder {
+    color: var(--text-color-light);
+    font-weight: 400;
+    text-align: center;
+    letter-spacing: 1px;
+}
+
+input:focus::placeholder {
+    color: transparent;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active,
+input:-webkit-autofill::first-line {
+    -webkit-box-shadow: 0 0 0 30px var(--secondary-bg-color) inset !important;
+    -webkit-text-fill-color: var(--text-color-light);
+    caret-color: var(--text-color-light);
+    text-align: center;
+    font-size: 16px !important;
 }
 
 button {
-    background-color: var(--main-button-color);
-    color: var(--text-color-dark);
-    font-weight: bold;
-    font-size: 16px;
-    letter-spacing: 1px;
-    padding: 5px;
-    border-radius: 10px;
+    background-color: var(--secondary-bg-color);
+    color: var(--text-color-light);
+    /* font-weight: 400; */
+    font-size: 18px;
+    /* letter-spacing: 1px; */
+    /* padding: 8px 30px 8px;
+    margin-left: -35px;
+    border-radius: 45px; */
+    border-style: hidden;
 }
+
+.input-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 8px;
+    color: var(--text-color-light);
+    border-radius: 45px;
+    background-color: var(--secondary-bg-color);
+    border-style: hidden;
+    text-align: right;
+}
+
+/* .input-container:focus {
+    border: 2px solid var(--text-color-light)
+} */
