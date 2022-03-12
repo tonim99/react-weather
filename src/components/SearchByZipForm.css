@@ -63,6 +63,6 @@ button {
     text-align: right;
 }
 
-/* .input-container:focus {
-    border: 2px solid var(--text-color-light)
-} */
+.input-container:focus-within {
+    border: 4px solid var(--text-color-light)
+}

@@ -11,14 +11,14 @@
 .current-weather-container {
     display: flex;
     flex-direction: column;
-    width: 33%;
-    margin: 100px 0px;
+    width: 50%;
+    margin: 100px;
     align-items: center;
     justify-self: center;
-    background-color: var(--main-bg-color);
-    padding: 40px;
-    border: 2px solid var(--text-color-light);
-    border-radius: 5px;
+    /* background-color: var(--main-bg-color); */
+    background-color: #8476ae;
+    /* border: 2px solid var(--text-color-light); */
+    border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
 }
 

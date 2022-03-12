@@ -1,4 +1,7 @@
-/* Makes API calls to openweather map One Call API and Geocoding API and passes props to children */
+/* 
+    Makes API calls to openweathermap OneCall and Geocoding APIs 
+    and passes props to children 
+*/
 
 import React, { useEffect, useState } from 'react'
 import CurrentWeather from '../components/CurrentWeather'
@@ -6,7 +9,11 @@ import NavBar from '../components/NavBar'
 import Weather7Day from '../components/Weather7Day';
 import './Weather.css';
 
+// npm package to convert full state names to abbreviations //
+import states from 'us-state-converter';
+
 const Weather = () => {
+    // DEFINE STATE //
     const [zip, setZip] = useState('')
     const [lat, setLat] = useState('')
     const [lon, setLon] = useState('')
@@ -16,14 +23,20 @@ const Weather = () => {
     const [input, setInput] = useState('')
     const [weather, setWeather] = useState('')
     const [weather7Day, setWeather7Day] = useState([])
-  
+    const [stateName, setStateName] = useState('')
+
+    // DEFINE OTHER VARIABLES //
+    const stateAbbr = states.abbr(stateName)
     const APIKey = process.env.REACT_APP_API_KEY;
     const baseUrl = 'http://api.openweathermap.org';
    
+    // API CALLS AND SET STATE //
     const fetchLatLon = () => {
+        // calls geolocation API and sets lat, lon, city //
         fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
             .then(res => res.json())
             .then((data) => {
+                console.log(data, '***location info***')
                 setLat(data.lat)
                 setLon(data.lon)
                 setCity(data.name)
@@ -31,7 +44,20 @@ const Weather = () => {
             .catch(err => console.error(err))
     }
 
+    const fetchStateByLatLon = () => {
+        // calls geolocation api (reverse) and sets stateName //
+        let url = `${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`
+        fetch(url)
+            .then(res=>res.json())
+            .then((data) => {
+                console.log(data)
+                setStateName(data[0].state)
+            })
+            .catch(err => console.error(err))
+    }
+    
     const fetchWeather = () => {
+        // calls onecall api and sets weather conditions //
         let url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
         fetch(url)
             .then(res => res.json())
@@ -52,6 +78,7 @@ const Weather = () => {
 
     useEffect(() => {
         console.log('***use effect 2 fired***')
+        fetchStateByLatLon()
         fetchWeather()
     }, [city])
 
@@ -63,9 +90,9 @@ const Weather = () => {
                 setInput={setInput}
             />
             <div className='current-weather-container'>
-                <h1>Your Current Local Weather</h1>
                 <CurrentWeather 
                     city={city}
+                    stateAbbr={stateAbbr}
                     weather={weather}
                     conditions={conditions}
                     icon={icon}

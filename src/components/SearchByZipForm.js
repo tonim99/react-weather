@@ -6,9 +6,9 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-import './Form.css';
+import './SearchByZipForm.css';
 
-const Form = ({ setZip, input, setInput }) => {
+const SearchByZipForm = ({ setZip, input, setInput }) => {
 
     const changeZip = (e) => {
         e.preventDefault()
@@ -48,4 +48,4 @@ const Form = ({ setZip, input, setInput }) => {
     )
 }
 
-export default Form
+export default SearchByZipForm

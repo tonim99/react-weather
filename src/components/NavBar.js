@@ -1,11 +1,11 @@
 import React from 'react'
-import Form from './Form'
+import SearchByZip from './SearchByZipForm'
 import './NavBar.css'
 const NavBar = ({ setZip, input, setInput }) => {
 
     return (
         <nav>
-            <Form 
+            <SearchByZip
                 setZip={setZip}
                 input={input}
                 setInput={setInput}
