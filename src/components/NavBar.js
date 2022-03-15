@@ -1,3 +1,6 @@
+/* NavBar renders nav element and passes props to child - 
+SearchByZip (form that searches for weather by zip code) */
+
 import React from 'react'
 import SearchByZip from './SearchByZipForm'
 import './NavBar.css'

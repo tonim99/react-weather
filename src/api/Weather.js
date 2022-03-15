@@ -1,6 +1,6 @@
 /* 
     Makes API calls to openweathermap OneCall and Geocoding APIs 
-    and passes props to children 
+    and passes props to children - NavBar, CurrentWeather & Weather7Day
 */
 
 import React, { useEffect, useState } from 'react'
@@ -89,18 +89,14 @@ const Weather = () => {
                 input={input}
                 setInput={setInput}
             />
-            <div className='current-weather-container'>
-                <CurrentWeather 
+            <CurrentWeather 
                     city={city}
                     stateAbbr={stateAbbr}
                     weather={weather}
                     conditions={conditions}
                     icon={icon}
                 />
-            </div>
-            <div className="7-day-weather">
-                <Weather7Day weather7Day={weather7Day}/>
-            </div>
+            <Weather7Day weather7Day={weather7Day}/>
         </div>
     )
 }
