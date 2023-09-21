@@ -25,7 +25,7 @@ const Weather7Day = ({ weather7Day }) => {
         && dayTimeWeather.map((day, i) => (
           <div key={i}>
             {day.weekday} {day.month}/{day.date} Low: {Math.round(day.min)} High: {Math.round(day.max)} {day.conditions} 
-            <img className='weather-icon-small' alt='weather-icon' src={`http://openweathermap.org/img/wn/${day.icon}@2x.png`}/></div>
+            <img className='weather-icon-small' alt='weather-icon' src={`http://openweathermap.org/img/wn/${day.icon}.png`}/></div>
         ))
       }
     </div> 
