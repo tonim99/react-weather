@@ -3,7 +3,7 @@
     and passes props to children - NavBar, CurrentWeather & Weather7Day
 */
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import CurrentWeather from '../components/CurrentWeather'
 import NavBar from '../components/NavBar'
 import Weather7Day from '../components/Weather7Day';
@@ -31,7 +31,7 @@ const Weather = () => {
     const baseUrl = 'http://api.openweathermap.org';
    
     // API CALLS AND SET STATE //
-    const fetchLatLon = () => {
+    const fetchLatLon = useCallback(() => {
         // calls geolocation API and sets lat, lon, city //
         fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
             .then(res => res.json())
@@ -41,10 +41,10 @@ const Weather = () => {
                 setLon(data.lon)
                 setCity(data.name)
             })
-            .catch(err => console.error(err))
-    }
+            .catch(err =>  <div>{err}</div>)
+    }, [APIKey, zip])
 
-    const fetchStateByLatLon = () => {
+    const fetchStateByLatLon = useCallback(() => {
         // calls geolocation api (reverse) and sets stateName //
         let url = `${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`
         fetch(url)
@@ -53,12 +53,12 @@ const Weather = () => {
                 console.log(data)
                 setStateName(data[0].state)
             })
-            .catch(err => console.error(err))
-    }
+            .catch(err =>  <div>{err}</div>)
+    }, [APIKey, lat, lon])
     
-    const fetchWeather = () => {
+    const fetchWeather = useCallback(() => {
         // calls onecall api and sets weather conditions //
-        let url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
+        const url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
         fetch(url)
             .then(res => res.json())
             .then((data) => {
@@ -68,19 +68,19 @@ const Weather = () => {
                 setIcon(data.current.weather[0].icon)
                 setWeather7Day(data.daily)
             })
-            .catch(err =>  console.error(err))
-    }
+            .catch(err =>  <div>{err}</div>)
+    }, [APIKey, lat, lon])
     
     useEffect(() => {
         console.log('***use effect 1 fired***')
             fetchLatLon()
-    }, [zip])
+    }, [fetchLatLon])
 
     useEffect(() => {
         console.log('***use effect 2 fired***')
         fetchStateByLatLon()
         fetchWeather()
-    }, [city])
+    }, [fetchStateByLatLon, fetchWeather])
 
     return(
         <div className='weather-container'>
