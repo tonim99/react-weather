@@ -7,14 +7,18 @@ const CurrentWeather = ({ weather, conditions, icon, city, stateAbbr }) => {
         <>
         {weather && <div className='current-weather-card'>
             {city && <header className='current-weather-header'><h2>{city}, {stateAbbr}</h2></header>}
-                <div>
+            <div className='current-weather-container'>
+                <div className='current-weather-column'>
                     <p className='current-temp'>{Math.round(weather.temp)} <span>&deg;</span></p>
-                    {conditions && <div className='weather-conditions-container'>
-                    <h4>{conditions}</h4>
-                    {icon && <img className='weather-icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@2x.png`}/>}
+                    <p className='current-conditions'>{conditions}</p>
+                    <p className='current-feels-like'>Feels Like {Math.round(weather.feels_like)} <span>&deg;</span></p>
+                </div>
+                {conditions && <div className='weather-conditions-container'>
+                    {icon && <img className='weather-icon' alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@4x.png`}/>}
                 </div>}
-                <p className='current-feels-like'>Feels Like {Math.round(weather.feels_like)} <span>&deg;</span></p>
             </div>
+                    
+            
         </div>}
         </>
     )
