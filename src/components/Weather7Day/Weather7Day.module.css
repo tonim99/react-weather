@@ -1,0 +1,48 @@
+
+.weather-daily{
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(255, 255, 255, 0.3);
+    padding: 20px;
+    align-items: left;
+    backdrop-filter: blur(10px);
+    border-radius: 8px;
+    width: 80%;
+}
+
+.forecast {
+    font-size: 24px;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 0;
+}   
+
+.weather-daily-row {
+    display: flex;
+}
+
+.weather-daily-items{
+    width: calc(14.28% - 10px);
+    text-align: center;
+    padding: 20px;
+    border-right: 1px solid white;
+}
+
+.weather-daily-items:last-child{
+    border-right: unset;
+}
+
+.weekday {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.conditions {
+    display: flex;
+    justify-content: center;
+    text-transform: capitalize;
+}
+
+
+
+
