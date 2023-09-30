@@ -8,15 +8,15 @@ h4 {
     font-weight: normal;
 }
 
-.current-weather-card {
+/* .current-weather-card {
     display: flex;
     flex-direction: column;
-    width: 50%;
-    margin: 100px;
+    width: 80%;
+    margin: 100px 0px;
     background-color: #8476ae;
     border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
-}
+} */
 
 .current-weather-header {
     display: flex;
@@ -31,21 +31,18 @@ h4 {
 
 .current-weather-container {
     display: flex;
-    padding: 10px;
+    padding: 10px 20px;
     align-items: center;
     justify-content: space-between;
 }
 
-/* .current-weather-column {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-} */
+.current-weather-column {
+   /* padding-left: 20px; */
+}
 
 .current-temp {
     font-size: 96px;
     font-weight: bold;
-    /* padding: 12px; */
     margin: 0px;
     display: flex;
 }
@@ -53,14 +50,15 @@ h4 {
 .current-conditions {
     display: flex;
     font-size: 18px;
-    justify-content: center;
-    width: 96px;
+    justify-content: left;
+    width: 100%;
+    text-transform: capitalize;
 }
 
 .current-feels-like {
     display: flex;
     font-size: 18px;
-    justify-content: center;
+    justify-content: left;
     
 }
 
