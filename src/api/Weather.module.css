@@ -1,13 +1,9 @@
-.weather-container {
+.main-container {
     margin: 0;
-    width: 100vw;
+    width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
 }
-
-/* h2 {
-    margin-top: 0;
-} */

@@ -4,26 +4,26 @@
 */
 
 import React, { useEffect, useState, useCallback } from 'react'
-import CurrentWeather from '../components/CurrentWeather'
-import NavBar from '../components/NavBar'
-import Weather7Day from '../components/Weather7Day';
-import './Weather.css';
+import CurrentWeather from '../components/CurrentWeather/CurrentWeather'
+import NavBar from '../components/NavBar/NavBar'
+import Weather7Day from '../components/Weather7Day/Weather7Day';
+import './Weather.module.css';
 
 // npm package to convert full state names to abbreviations //
 import states from 'us-state-converter';
 
 const Weather = () => {
     // DEFINE STATE //
-    const [zip, setZip] = useState('')
-    const [lat, setLat] = useState('')
-    const [lon, setLon] = useState('')
-    const [city, setCity] = useState('')
-    const [conditions, setConditions] = useState('')
-    const [icon, setIcon] = useState('')
-    const [input, setInput] = useState('')
-    const [weather, setWeather] = useState('')
-    const [weather7Day, setWeather7Day] = useState([])
-    const [stateName, setStateName] = useState('')
+    const [zip, setZip] = useState()
+    const [lat, setLat] = useState()
+    const [lon, setLon] = useState()
+    const [city, setCity] = useState()
+    const [conditions, setConditions] = useState()
+    const [icon, setIcon] = useState()
+    const [input, setInput] = useState()
+    const [weather, setWeather] = useState()
+    const [weather7Day, setWeather7Day] = useState()
+    const [stateName, setStateName] = useState()
 
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName)
@@ -36,7 +36,6 @@ const Weather = () => {
         fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
             .then(res => res.json())
             .then((data) => {
-                console.log(data, '***location info***')
                 setLat(data.lat)
                 setLon(data.lon)
                 setCity(data.name)
@@ -50,7 +49,6 @@ const Weather = () => {
         fetch(url)
             .then(res=>res.json())
             .then((data) => {
-                console.log(data)
                 setStateName(data[0].state)
             })
             .catch(err =>  <div>{err}</div>)
@@ -62,9 +60,8 @@ const Weather = () => {
         fetch(url)
             .then(res => res.json())
             .then((data) => {
-                console.log('***result of fetchWeather***', data)
                 setWeather(data.current)
-                setConditions(data.current.weather[0].main)
+                setConditions(data.current.weather[0].description)
                 setIcon(data.current.weather[0].icon)
                 setWeather7Day(data.daily)
             })
@@ -72,23 +69,23 @@ const Weather = () => {
     }, [APIKey, lat, lon])
     
     useEffect(() => {
-        console.log('***use effect 1 fired***')
-            fetchLatLon()
+        fetchLatLon()
     }, [fetchLatLon])
 
     useEffect(() => {
-        console.log('***use effect 2 fired***')
         fetchStateByLatLon()
         fetchWeather()
     }, [fetchStateByLatLon, fetchWeather])
 
     return(
-        <div className='weather-container'>
+        <div className='main-container'>
             <NavBar 
                 setZip={setZip}
                 input={input}
                 setInput={setInput}
             />
+           
+
             <CurrentWeather 
                     city={city}
                     stateAbbr={stateAbbr}
@@ -96,6 +93,7 @@ const Weather = () => {
                     conditions={conditions}
                     icon={icon}
                 />
+            
             <Weather7Day weather7Day={weather7Day}/>
         </div>
     )
