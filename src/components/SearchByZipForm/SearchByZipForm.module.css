@@ -5,15 +5,13 @@ form {
 
 input {
     font-size: 16px;
-    padding: 4px 20px;
+    padding: 8px;
     color: var(--text-color-light);
     background-color: var(--secondary-bg-color);
     border-style: hidden;
+    border-radius: 45px;
     text-align: center;
-}
-
-input:focus {
-    outline: none;
+    width: 400px;
 }
 
 ::placeholder {
@@ -42,24 +40,23 @@ input:-webkit-autofill::first-line {
 button {
     background-color: var(--secondary-bg-color);
     color: var(--text-color-light);
-    /* font-weight: 400; */
     font-size: 18px;
-    /* letter-spacing: 1px; */
-    /* padding: 8px 30px 8px;
-    margin-left: -35px;
-    border-radius: 45px; */
+    padding: 8px;
+    margin-left: -35px; 
+    border-radius: 45px; 
     border-style: hidden;
+    font-size: 16px;
 }
 
 .input-container {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 8px 8px;
     color: var(--text-color-light);
     border-radius: 45px;
     background-color: var(--secondary-bg-color);
-    border-style: hidden;
+    border-style: solid;
+    border: 5px solid var(--text-color-light);
     text-align: right;
 }
 
