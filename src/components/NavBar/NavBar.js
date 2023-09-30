@@ -2,8 +2,8 @@
 SearchByZip (form that searches for weather by zip code) */
 
 import React from 'react'
-import SearchByZip from './SearchByZipForm'
-import './NavBar.css'
+import SearchByZip from '../SearchByZipForm/SearchByZipForm'
+import './NavBar.module.css'
 const NavBar = ({ setZip, input, setInput }) => {
 
     return (
