@@ -1,8 +1,6 @@
 .App {
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
   background: var(--main-bg-color);
   background-image: var(--gradient-primary);
   background-attachment: fixed;
