@@ -8,17 +8,17 @@ h4 {
     font-weight: normal;
 }
 
-/* .current-weather-card {
+.currentWeatherCard {
     display: flex;
     flex-direction: column;
     width: 80%;
-    margin: 100px 0px;
+    margin: 20px;
     background-color: #8476ae;
     border-radius: 8px;
     box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
-} */
+}
 
-.current-weather-header {
+.currentWeatherHeader {
     display: flex;
     align-items: center;
     width: 100%;
@@ -29,25 +29,25 @@ h4 {
     border-top-left-radius: 8px;
 }
 
-.current-weather-container {
+.currentWeatherContainer {
     display: flex;
     padding: 10px 20px;
     align-items: center;
     justify-content: space-between;
 }
 
-.current-weather-column {
+.currentWeatherColumn {
    /* padding-left: 20px; */
 }
 
-.current-temp {
+.currentTemp {
     font-size: 96px;
     font-weight: bold;
     margin: 0px;
     display: flex;
 }
 
-.current-conditions {
+.currentConditions {
     display: flex;
     font-size: 18px;
     justify-content: left;
@@ -55,18 +55,18 @@ h4 {
     text-transform: capitalize;
 }
 
-.current-feels-like {
+.currentFeelsLike {
     display: flex;
     font-size: 18px;
     justify-content: left;
     
 }
 
-/* .weather-conditions-container {
+/* .weatherConditionsContainer {
 
 } */
 
-.weather-icon {
+.weatherIcon {
     height: 192px;
     width: 192px;
 }
