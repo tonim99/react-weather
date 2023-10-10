@@ -4,5 +4,5 @@ nav {
     justify-content: center;
     height: 82px;
     width: 100%;
-    background-color: var(--main-bg-color);
+    background-color: var(--primary-bg-color);
 }
