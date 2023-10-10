@@ -8,6 +8,7 @@ input {
     padding: 8px;
     color: var(--text-color-light);
     background-color: var(--secondary-bg-color);
+    /* background-color: #4b799a; */
     border-style: hidden;
     border-radius: 45px;
     text-align: center;
@@ -39,6 +40,7 @@ input:-webkit-autofill::first-line {
 
 button {
     background-color: var(--secondary-bg-color);
+    /* background-color: #4b799a; */
     color: var(--text-color-light);
     font-size: 18px;
     padding: 8px;
