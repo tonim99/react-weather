@@ -1,13 +1,16 @@
 
-.weather-daily{
+.weatherDaily{
     display: flex;
     flex-direction: column;
-    background-color: rgba(255, 255, 255, 0.3);
-    padding: 20px;
+    /* background-color: #8476ae; */
+    background-color: #ffffff;
+    color: var(--text-color-dark);
     align-items: left;
     backdrop-filter: blur(10px);
     border-radius: 8px;
     width: 80%;
+    margin: 20px auto;
+    box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1) inset;
 }
 
 .forecast {
@@ -15,21 +18,29 @@
     display: flex;
     justify-content: flex-start;
     margin-top: 0;
+    padding: 20px 20px 0px 20px;
 }   
 
-.weather-daily-row {
+.weatherDailyRow {
     display: flex;
+    flex: 0 0 calc((100%/7) - 20px);
+    flex-wrap: wrap;
+    justify-content: left;
 }
 
-.weather-daily-items{
+@media only screen and (max-width: 768px){
+    .weatherDailyRow{
+        flex: 0 0 calc((100%/4 ) - 20px);
+        justify-content: center;
+    }
+}
+.weatherDailyItems{
     width: calc(14.28% - 10px);
     text-align: center;
     padding: 20px;
-    border-right: 1px solid white;
-}
-
-.weather-daily-items:last-child{
-    border-right: unset;
+    outline: 1px solid #000000;
+    border-radius: 8px;
+    margin: 5px;
 }
 
 .weekday {

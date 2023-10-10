@@ -1,5 +1,5 @@
 import React from 'react'
-import './Weather7Day.module.css'
+import styles from './Weather7Day.module.css'
 
 const Weather7Day = ({ weather7Day }) => {
   
@@ -18,15 +18,15 @@ const Weather7Day = ({ weather7Day }) => {
 
   return(
     <>
-    {dayTimeWeather && <div className='weather-daily'>
-    <h3 className='forecast'>Daily Forecast</h3>
-      <div className='weather-daily-row'>
+    {dayTimeWeather && <div className={styles.weatherDaily}>
+    <h3 className={styles.forecast}>Daily Forecast</h3>
+      <div className={styles.weatherDailyRow}>
       {dayTimeWeather 
         && dayTimeWeather.map((day, i) => (
-          <div key={i} className='weather-daily-items'>
-            <div className='weekday'>{day.weekday}&nbsp;{day.date}</div>
+          <div key={i} className={styles.weatherDailyItems}>
+            <div className={styles.weekday}>{day.weekday}&nbsp;{day.date}</div>
               <img alt='weather-icon' src={`http://openweathermap.org/img/wn/${day.icon}.png`}/>
-            <div className='conditions'>{day.conditions} </div>
+            <div className={styles.conditions}>{day.conditions} </div>
             <div><b>{Math.round(day.max)}&deg;</b>/{Math.round(day.min)}&deg;</div>
             <div>
             </div>
