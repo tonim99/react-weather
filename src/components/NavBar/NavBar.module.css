@@ -1,8 +1,0 @@
-nav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 82px;
-    width: 100%;
-    background-color: var(--primary-bg-color);
-}
