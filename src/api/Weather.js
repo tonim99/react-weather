@@ -7,29 +7,68 @@ import React, { useEffect, useState, useCallback } from 'react'
 import CurrentWeather from '../components/CurrentWeather/CurrentWeather'
 import NavBar from '../components/NavBar/NavBar'
 import Weather7Day from '../components/Weather7Day/Weather7Day';
-import './Weather.module.css';
-
+import styled, { ThemeProvider } from 'styled-components'
+import GlobalStyle from '../components/GlobalStyle/GlobalStyle';
 // npm package to convert full state names to abbreviations //
 import states from 'us-state-converter';
 
+const MainContainer = styled.div`
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+    `
+
+export const themes = {
+    default: {
+        bg: 'var(--primary-bg-color)',
+        bgImage: 'var(--gradient-primary)',
+        navBg: 'var(--primary-bg-color)',
+        searchBg: 'var(--secondary-bg-color)'
+    },
+    sunny: {
+        bg: 'var(--sunny-bg-color)',
+        bgImage: 'var(--gradient-sunny)',
+        navBg: 'transparent',
+        searchBg: '#e2b71c'
+    },
+    cloudy: {
+        bg: 'var(--cloudy-bg-color)',
+        bgImage: 'var(--gradient-cloudy)',
+        navBg: 'transparent',
+        searchBg: 'var(--secondary-bg-color)'
+    },
+    rainy: {
+        bg: 'var(--rainy-bg-color)',
+        bgImage: 'var(--gradient-rainy)',
+        navBg: '#847996',
+        searchBg: 'var(--secondary-bg-color)'
+    }
+};
+
 const Weather = () => {
     // DEFINE STATE //
-    const [zip, setZip] = useState()
+    const [zip, setZip] = useState('')
     const [lat, setLat] = useState()
     const [lon, setLon] = useState()
     const [city, setCity] = useState()
     const [conditions, setConditions] = useState()
+    const [id, setId] = useState()
     const [icon, setIcon] = useState()
-    const [input, setInput] = useState()
+    const [input, setInput] = useState('')
     const [weather, setWeather] = useState()
     const [weather7Day, setWeather7Day] = useState()
     const [stateName, setStateName] = useState()
+    const [weatherCondition, setWeatherCondition] = useState('default');
 
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName)
     const APIKey = process.env.REACT_APP_API_KEY;
     const baseUrl = 'http://api.openweathermap.org';
-   
+
     // API CALLS AND SET STATE //
     const fetchLatLon = useCallback(() => {
         // calls geolocation API and sets lat, lon, city //
@@ -62,6 +101,7 @@ const Weather = () => {
             .then((data) => {
                 setWeather(data.current)
                 setConditions(data.current.weather[0].description)
+                setId(data.current.weather[0].id)
                 setIcon(data.current.weather[0].icon)
                 setWeather7Day(data.daily)
             })
@@ -76,30 +116,56 @@ const Weather = () => {
         fetchStateByLatLon()
         fetchWeather()
     }, [fetchStateByLatLon, fetchWeather])
+    
+    useEffect(() => {
+        let idToInt = String(id)
+        const clearSkyConditions = ['800'];
+        const cloudyConditions = ['801', '802', '803', '804'];
+        const rainyConditions = ['500', '501', '502', '503', '504', '511', '520', '521', '522', '531'];
+        const snowyConditions = ['600', '601', '602', '611', '612', '613', '615', '616', '620', '621', '622'];
+        const mistConditions = ['701', '711', '721', '731', '741', '751', '761', '762', '771', '781'];
+        const drizzleConditions = ['300', '301', '302', '310', '311', '312', '313', '314', '321'];
+        const thunderstormConditions = ['200', '201', '202', '210', '211', '212', '221', '230', '231', '232',]
+        let conditionId
 
+        if(clearSkyConditions.includes(idToInt)){
+            conditionId = 'sunny'
+        }else if(cloudyConditions.includes(idToInt)){
+            conditionId = 'cloudy'
+        }else if(rainyConditions.includes(idToInt) || snowyConditions.includes(idToInt) || mistConditions.includes(idToInt) || drizzleConditions.includes(idToInt) || thunderstormConditions.includes(idToInt)){
+            conditionId = 'rainy'
+        } else {
+            conditionId = 'default'
+        }
+
+        setWeatherCondition(conditionId)
+      }, [id]);
+
+   
     return(
-        <div className='main-container'>
-            <NavBar 
-                setZip={setZip}
-                input={input}
-                setInput={setInput}
-            />
-           
-
-            <CurrentWeather 
-                    city={city}
-                    stateAbbr={stateAbbr}
-                    weather={weather}
-                    conditions={conditions}
-                    icon={icon}
+        <ThemeProvider theme={themes[weatherCondition]}>
+            <GlobalStyle />
+            <MainContainer>
+                <NavBar 
+                    setZip={setZip}
+                    input={input}
+                    setInput={setInput}
+                    weatherCondition={weatherCondition}
                 />
-            
-            <Weather7Day weather7Day={weather7Day}/>
-        </div>
+                <CurrentWeather 
+                        city={city}
+                        stateAbbr={stateAbbr}
+                        weather={weather}
+                        conditions={conditions}
+                        icon={icon}
+                    />
+                <Weather7Day weather7Day={weather7Day}/>
+            </MainContainer>
+        </ThemeProvider>
     )
 }
 
-export default Weather
+export default Weather;
 
 
            
