@@ -33,19 +33,19 @@ export const themes = {
         bg: 'var(--sunny-bg-color)',
         bgImage: 'var(--gradient-sunny)',
         navBg: 'transparent',
-        searchBg: '#e2b71c'
+        searchBg: '#D87C33'
     },
     cloudy: {
         bg: 'var(--cloudy-bg-color)',
         bgImage: 'var(--gradient-cloudy)',
         navBg: 'transparent',
-        searchBg: 'var(--secondary-bg-color)'
+        searchBg: '#7E7E7E'
     },
     rainy: {
         bg: 'var(--rainy-bg-color)',
         bgImage: 'var(--gradient-rainy)',
-        navBg: '#847996',
-        searchBg: 'var(--secondary-bg-color)'
+        navBg: 'transparent',
+        searchBg: '#415C71'
     }
 };
 

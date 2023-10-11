@@ -20,6 +20,10 @@ font-size: 16px;
     width: 400px;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
 `
+
+const StyledButton = styled.button`
+background-color: ${(props) => props.theme.navBg};
+`
 const SearchByZipForm = ({ setZip, input, setInput }) => {
 
     const changeZip = (e) => {
@@ -52,9 +56,9 @@ const SearchByZipForm = ({ setZip, input, setInput }) => {
                     placeholder='Search Zip Code'
                     onChange={(e) => setInput(e.target.value)}
                 />
-                <button type='submit'>
+                <StyledButton type='submit'>
                     <FontAwesomeIcon icon={faSearch} rotation={90} />
-                </button>
+                </StyledButton>
             </div>
         </form>
     )
