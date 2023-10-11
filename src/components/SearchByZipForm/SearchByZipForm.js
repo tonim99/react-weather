@@ -7,7 +7,19 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import './SearchByZipForm.module.css';
+import styled from 'styled-components'
 
+const StyledInput = styled.input`
+font-size: 16px;
+    padding: 8px;
+    color: var(--text-color-light);
+    background-color: ${(props) => props.theme.searchBg};
+    border-style: hidden;
+    border-radius: 45px;
+    text-align: center;
+    width: 400px;
+    box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
+`
 const SearchByZipForm = ({ setZip, input, setInput }) => {
 
     const changeZip = (e) => {
@@ -33,7 +45,7 @@ const SearchByZipForm = ({ setZip, input, setInput }) => {
     return(
         <form onSubmit={(e) => changeZip(e)}>
             <div className="input-container">
-                <input 
+                <StyledInput 
                     type='text'
                     value={input}
                     name='zip'
