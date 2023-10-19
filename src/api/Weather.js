@@ -64,6 +64,17 @@ const Weather = () => {
     const [stateName, setStateName] = useState()
     const [weatherCondition, setWeatherCondition] = useState('default');
 
+    const clearVariables = () => {
+        setLat('')
+        setLon('')
+        setCity('')
+        setStateName('')
+        setWeather('')
+        setConditions('')
+        setId('')
+        setIcon('')
+        setWeather7Day('')
+    }
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName)
     const APIKey = process.env.REACT_APP_API_KEY;
@@ -72,6 +83,7 @@ const Weather = () => {
     // API CALLS AND SET STATE //
     const fetchLatLon = useCallback(() => {
         // calls geolocation API and sets lat, lon, city //
+        clearVariables()
         fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
             .then(res => res.json())
             .then((data) => {
@@ -79,22 +91,24 @@ const Weather = () => {
                 setLon(data.lon)
                 setCity(data.name)
             })
-            .catch(err =>  <div>{err}</div>)
+            .catch(err =>  <div>{err.message}</div>)
     }, [APIKey, zip])
 
     const fetchStateByLatLon = useCallback(() => {
         // calls geolocation api (reverse) and sets stateName //
+        
         let url = `${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`
         fetch(url)
             .then(res=>res.json())
             .then((data) => {
                 setStateName(data[0].state)
             })
-            .catch(err =>  <div>{err}</div>)
+            .catch(err =>  <div>{err.message}</div>)
     }, [APIKey, lat, lon])
     
     const fetchWeather = useCallback(() => {
         // calls onecall api and sets weather conditions //
+        
         const url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
         fetch(url)
             .then(res => res.json())
@@ -105,7 +119,7 @@ const Weather = () => {
                 setIcon(data.current.weather[0].icon)
                 setWeather7Day(data.daily)
             })
-            .catch(err =>  <div>{err}</div>)
+            .catch(err =>  <div>{err.message}</div>)
     }, [APIKey, lat, lon])
     
     useEffect(() => {
@@ -152,6 +166,7 @@ const Weather = () => {
                     setInput={setInput}
                     weatherCondition={weatherCondition}
                 />
+                {city && weather && conditions && icon &&
                 <CurrentWeather 
                         city={city}
                         stateAbbr={stateAbbr}
@@ -159,7 +174,8 @@ const Weather = () => {
                         conditions={conditions}
                         icon={icon}
                     />
-                <Weather7Day weather7Day={weather7Day}/>
+                }
+                {weather7Day && <Weather7Day weather7Day={weather7Day}/>}
             </MainContainer>
         </ThemeProvider>
     )
