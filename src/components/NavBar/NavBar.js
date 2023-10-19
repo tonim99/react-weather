@@ -5,7 +5,7 @@ import React from 'react'
 import SearchByZip from '../SearchByZipForm/SearchByZipForm'
 import styled from 'styled-components'
 
-const Nav = styled.nav`
+const StyledNav = styled.nav`
 display: flex;
     align-items: center;
     justify-content: center;
@@ -16,13 +16,13 @@ display: flex;
 const NavBar = ({ setZip, input, setInput }) => {
 
     return (
-        <Nav>
+        <StyledNav>
             <SearchByZip
                 setZip={setZip}
                 input={input}
                 setInput={setInput}
             />
-        </Nav>
+        </StyledNav>
     )
 }
 

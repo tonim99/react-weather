@@ -12,7 +12,7 @@ import GlobalStyle from '../components/GlobalStyle/GlobalStyle';
 // npm package to convert full state names to abbreviations //
 import states from 'us-state-converter';
 
-const MainContainer = styled.div`
+const StyledMainContainer = styled.div`
         margin: 0;
         width: 100%;
         height: 100%;
@@ -21,6 +21,26 @@ const MainContainer = styled.div`
         align-items: center;
         justify-content: space-between;
     `
+
+const screenSize = {
+    mobileS: '320px',
+    mobileM: '375px',
+    mobileL: '425px',
+    tablet: '768px',
+    laptop: '1024px',
+    laptopL: '1440px',
+    desktop: '2560px'
+}
+
+export const device = {
+    mobileS: `(min-width: ${screenSize.mobileS})`,
+    mobileM: `(min-width: ${screenSize.mobileM})`,
+    mobileL: `(min-width: ${screenSize.mobileL})`,
+    tablet: `(min-width: ${screenSize.tablet})`,
+    laptop: `(min-width: ${screenSize.laptop})`,
+    laptopL: `(min-width: ${screenSize.laptopL})`,
+    desktop: `(min-width: ${screenSize.desktop})`
+  };
 
 export const themes = {
     default: {
@@ -159,7 +179,7 @@ const Weather = () => {
     return(
         <ThemeProvider theme={themes[weatherCondition]}>
             <GlobalStyle />
-            <MainContainer>
+            <StyledMainContainer>
                 <NavBar 
                     setZip={setZip}
                     input={input}
@@ -176,7 +196,7 @@ const Weather = () => {
                     />
                 }
                 {weather7Day && <Weather7Day weather7Day={weather7Day}/>}
-            </MainContainer>
+            </StyledMainContainer>
         </ThemeProvider>
     )
 }
