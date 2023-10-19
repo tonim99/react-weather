@@ -13,7 +13,6 @@ input:focus::placeholder {
 input:-webkit-autofill,
 input:-webkit-autofill:hover, 
 input:-webkit-autofill:focus, 
-input:-webkit-autofill:focus-active,
 input:-webkit-autofill:active,
 input:-webkit-autofill::first-line {
     -webkit-box-shadow: 0 0 0 30px var(--secondary-bg-color) inset !important;

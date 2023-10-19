@@ -37,6 +37,7 @@ const StyledInput = styled.input`
     text-align: center;
     width: 400px;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
+    outline: none;
 `
 
 const StyledButton = styled.button`
