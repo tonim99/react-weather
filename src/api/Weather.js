@@ -2,10 +2,15 @@
     Makes API calls to openweathermap OneCall and Geocoding APIs 
     and passes props to children - NavBar, CurrentWeather & Weather7Day
 */
-
-import React, { useEffect, useState, useCallback } from 'react'
-import CurrentWeather from '../components/CurrentWeather/CurrentWeather'
-import NavBar from '../components/NavBar/NavBar'
+/*
+    401 did not specify api key not activated or wrong
+    404 wrong city name, code or id
+    429 more than 60 api calls per min
+    500, 502, 503, 504 server error contact owm for help+
+*/
+import React, { useEffect, useState, useCallback } from 'react';
+import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
+import NavBar from '../components/NavBar/NavBar';
 import Weather7Day from '../components/Weather7Day/Weather7Day';
 import styled, { ThemeProvider } from 'styled-components'
 import GlobalStyle from '../components/GlobalStyle/GlobalStyle';
@@ -13,14 +18,14 @@ import GlobalStyle from '../components/GlobalStyle/GlobalStyle';
 import states from 'us-state-converter';
 
 const StyledMainContainer = styled.div`
-        margin: 0;
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-    `
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+`;
 
 const screenSize = {
     mobileS: '320px',
@@ -30,7 +35,7 @@ const screenSize = {
     laptop: '1024px',
     laptopL: '1440px',
     desktop: '2560px'
-}
+};
 
 export const device = {
     mobileS: `(min-width: ${screenSize.mobileS})`,
@@ -71,18 +76,19 @@ export const themes = {
 
 const Weather = () => {
     // DEFINE STATE //
-    const [zip, setZip] = useState('')
-    const [lat, setLat] = useState()
-    const [lon, setLon] = useState()
-    const [city, setCity] = useState()
-    const [conditions, setConditions] = useState()
-    const [id, setId] = useState()
-    const [icon, setIcon] = useState()
-    const [input, setInput] = useState('')
-    const [weather, setWeather] = useState()
-    const [weather7Day, setWeather7Day] = useState()
-    const [stateName, setStateName] = useState()
+    const [zip, setZip] = useState('');
+    const [lat, setLat] = useState();
+    const [lon, setLon] = useState();
+    const [city, setCity] = useState();
+    const [conditions, setConditions] = useState();
+    const [id, setId] = useState();
+    const [icon, setIcon] = useState();
+    const [input, setInput] = useState('');
+    const [weather, setWeather] = useState();
+    const [weather7Day, setWeather7Day] = useState();
+    const [stateName, setStateName] = useState();
     const [weatherCondition, setWeatherCondition] = useState('default');
+    const [error, setError] = useState();
 
     const clearVariables = () => {
         setLat('')
@@ -94,25 +100,31 @@ const Weather = () => {
         setId('')
         setIcon('')
         setWeather7Day('')
-    }
+    };
     // DEFINE OTHER VARIABLES //
-    const stateAbbr = states.abbr(stateName)
+    const stateAbbr = states.abbr(stateName);
     const APIKey = process.env.REACT_APP_API_KEY;
     const baseUrl = 'http://api.openweathermap.org';
 
     // API CALLS AND SET STATE //
+    
     const fetchLatLon = useCallback(() => {
+        if(zip.trim() === ''){
+            return
+        }else{
+            clearVariables()
+            try{
+                fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
+                .then(res => res.json())
+                .then((data) => {
+                    setLat(data.lat)
+                    setLon(data.lon)
+                    setCity(data.name)
+                })
+            } catch(err) {setError(err.message)}  
+        }
         // calls geolocation API and sets lat, lon, city //
-        clearVariables()
-        fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
-            .then(res => res.json())
-            .then((data) => {
-                setLat(data.lat)
-                setLon(data.lon)
-                setCity(data.name)
-            })
-            .catch(err =>  <div>{err.message}</div>)
-    }, [APIKey, zip])
+    }, [APIKey, zip]);
 
     const fetchStateByLatLon = useCallback(() => {
         // calls geolocation api (reverse) and sets stateName //
@@ -124,7 +136,7 @@ const Weather = () => {
                 setStateName(data[0].state)
             })
             .catch(err =>  <div>{err.message}</div>)
-    }, [APIKey, lat, lon])
+    }, [APIKey, lat, lon]);
     
     const fetchWeather = useCallback(() => {
         // calls onecall api and sets weather conditions //
@@ -140,16 +152,16 @@ const Weather = () => {
                 setWeather7Day(data.daily)
             })
             .catch(err =>  <div>{err.message}</div>)
-    }, [APIKey, lat, lon])
+    }, [APIKey, lat, lon]);
     
     useEffect(() => {
         fetchLatLon()
-    }, [fetchLatLon])
+    }, [fetchLatLon]);
 
     useEffect(() => {
         fetchStateByLatLon()
         fetchWeather()
-    }, [fetchStateByLatLon, fetchWeather])
+    }, [fetchStateByLatLon, fetchWeather]);
     
     useEffect(() => {
         let idToInt = String(id)
