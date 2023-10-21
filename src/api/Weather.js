@@ -100,6 +100,7 @@ const Weather = () => {
         setId('')
         setIcon('')
         setWeather7Day('')
+        setError('')
     };
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName);
@@ -109,40 +110,53 @@ const Weather = () => {
     // API CALLS AND SET STATE //
     
     const fetchLatLon = useCallback(() => {
-        if(zip.trim() === ''){
-            return
-        }else{
-            clearVariables()
-            try{
-                fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
-                .then(res => res.json())
-                .then((data) => {
-                    setLat(data.lat)
-                    setLon(data.lon)
-                    setCity(data.name)
-                })
-            } catch(err) {setError(err.message)}  
-        }
         // calls geolocation API and sets lat, lon, city //
+        clearVariables()
+        if(zip){
+            fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
+                .then(async (res) => {
+                    if(!res.ok) {
+                        const errorData = await res.json();
+                        throw new Error(
+                            errorData.message
+                                ? `Error Code: ${errorData.cod} - ${errorData.message}`
+                                : 'Invalid zip code. Please try again.'
+                        );
+                    }
+                return res.json()
+            })
+            .then((data) => {
+                setLat(data.lat)
+                setLon(data.lon)
+                setCity(data.name)
+            })
+            .catch((err) => {
+                setError(err.message)
+            })
+        }   
     }, [APIKey, zip]);
 
     const fetchStateByLatLon = useCallback(() => {
         // calls geolocation api (reverse) and sets stateName //
         
         let url = `${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`
-        fetch(url)
-            .then(res=>res.json())
-            .then((data) => {
-                setStateName(data[0].state)
-            })
-            .catch(err =>  <div>{err.message}</div>)
+        if(lat && lon){
+                fetch(url)
+                .then(res => res.json())
+                .then((data) => {
+                    setStateName(data[0].state)
+                })
+                .catch((err) => setError(err.message))
+        }
     }, [APIKey, lat, lon]);
     
     const fetchWeather = useCallback(() => {
         // calls onecall api and sets weather conditions //
         
         const url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
-        fetch(url)
+        
+        if(lat && lon){
+            fetch(url)
             .then(res => res.json())
             .then((data) => {
                 setWeather(data.current)
@@ -150,8 +164,8 @@ const Weather = () => {
                 setId(data.current.weather[0].id)
                 setIcon(data.current.weather[0].icon)
                 setWeather7Day(data.daily)
-            })
-            .catch(err =>  <div>{err.message}</div>)
+            }).catch((err) => setError(err.message))
+        }
     }, [APIKey, lat, lon]);
     
     useEffect(() => {
@@ -198,6 +212,7 @@ const Weather = () => {
                     setInput={setInput}
                     weatherCondition={weatherCondition}
                 />
+                {error && <div>{error}</div>}
                 {city && weather && conditions && icon &&
                 <CurrentWeather 
                         city={city}
