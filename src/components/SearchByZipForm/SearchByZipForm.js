@@ -35,7 +35,7 @@ const StyledInput = styled.input`
     border-style: hidden;
     border-radius: 45px;
     text-align: center;
-    width: 400px;
+    width: 300px;
     box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.1);
     outline: none;
 `
