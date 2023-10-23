@@ -1,4 +1,5 @@
 import React from 'react'
+import { device } from '../../device.js'
 import styled from 'styled-components'
 
 const StyledWeatherDaily = styled.nav`
@@ -24,33 +25,60 @@ const StyledForecast = styled.h3`
 
 const StyledWeatherDailyRow = styled.div`
   display: flex;
-  flex: 0 0 calc((100%/7) - 20px);
-  flex-wrap: wrap;
-  justify-content: left;
+  flex-direction: column;
+  
 
-  @media $(device.tablet) {
-    flex: 0 0 calc((100%/4 ) - 20px);
+  @media ${device.tablet} {
+    flex-direction: row;
+    flex-wrap: wrap;
     justify-content: center;
   }
 `
 
 const StyledWeatherDailyItems = styled.div`
-  width: calc(14.28% - 10px);
-  text-align: center;
-  padding: 20px;
-  outline: 1px solid #000000;
-  border-radius: 8px;
-  margin: 5px;
-`
+ display: flex;
+ border-bottom: 1px solid #000000;
+ justify-content: space-between;
+ align-items: center;
+ padding-left: 20px;
 
+  @media ${device.tablet} {
+    display: flex;
+    flex-direction: column;
+    width: calc(14.28% - 10px);
+    justify-content: center;
+    padding: 20px;
+    outline: 1px solid #000000;
+    border-radius: 8px;
+    margin: 5px;
+  }
+`
 const StyledWeekday = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
+  width: 25%;
+
+  @media ${device.tablet} {
+    width: 100%;
+    text-align: center;
+  }
+`
+const StyledIcon = styled.div`
+  width: 25%;
+
+  @media ${device.tablet} {
+    width: 100%;
+    text-align: center;
+  }
 `
 const StyledConditions = styled.div`
   display: flex;
-  justify-content: center;
   text-transform: capitalize;
+  width: 25%;
+
+  @media ${device.tablet} {
+    justify-content: center; 
+  }
 `
 const Weather7Day = ({ weather7Day }) => {
   
@@ -76,7 +104,9 @@ const Weather7Day = ({ weather7Day }) => {
         && dayTimeWeather.map((day, i) => (
           <StyledWeatherDailyItems key={i}>
             <StyledWeekday>{day.weekday}&nbsp;{day.date}</StyledWeekday>
+            <StyledIcon>
               <img alt='weather-icon' src={`http://openweathermap.org/img/wn/${day.icon}.png`}/>
+            </StyledIcon>
             <StyledConditions>{day.conditions} </StyledConditions>
             <div><b>{Math.round(day.max)}&deg;</b>/{Math.round(day.min)}&deg;</div>
             <div>
