@@ -2,7 +2,7 @@
     
     
     const APIKey = process.env.REACT_APP_API_KEY;
-    const baseUrl = 'http://api.openweathermap.org';
+    const baseUrl = 'https://api.openweathermap.org';
 
     export const fetchLatLon = (zip) =>  fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
     export const fetchStateByLatLon = (lat, lon) => fetch(`${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`)
