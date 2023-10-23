@@ -29,9 +29,15 @@ const StyledHeader = styled.header`
 
 const StyledCurrentWeatherContainer = styled.div`
     display: flex;
+    flex-direction: row;
     padding: 10px 20px;
     align-items: center;
     justify-content: space-between;
+
+    @media $(device.tablet) {
+        flex-direction: column;
+        justify-content: center;
+    }
 `
 
 const StyledCurrentTemp = styled.p`
@@ -42,7 +48,6 @@ const StyledCurrentTemp = styled.p`
 `
 
 const StyledCurrentConditions = styled.p`
-    display: flex;
     font-size: 18px;
     justify-content: left;
     width: 100%;
@@ -50,7 +55,6 @@ const StyledCurrentConditions = styled.p`
 `
 
 const StyledCurrentFeelsLike = styled.p`
-    display: flex;
     font-size: 18px;
     justify-content: left;
 `
