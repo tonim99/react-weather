@@ -85,7 +85,7 @@ const Weather = () => {
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName);
     const APIKey = process.env.REACT_APP_API_KEY;
-    const baseUrl = 'http://api.openweathermap.org';
+    const baseUrl = 'https://api.openweathermap.org';
 
     // API CALLS AND SET STATE //
     
