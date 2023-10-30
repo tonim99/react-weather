@@ -108,7 +108,7 @@ const Weather7Day = ({ weather7Day }) => {
               <img alt='weather-icon' src={`http://openweathermap.org/img/wn/${day.icon}.png`}/>
             </StyledIcon>
             <StyledConditions>{day.conditions} </StyledConditions>
-            <div><b>{Math.round(day.max)}&deg;</b>/{Math.round(day.min)}&deg;</div>
+            <div><b>{Math.round(day.max)}&deg;F</b>/{Math.round(day.min)}&deg;F</div>
             <div>
             </div>
           </StyledWeatherDailyItems>
