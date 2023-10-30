@@ -2,18 +2,14 @@
     Makes API calls to openweathermap OneCall and Geocoding APIs 
     and passes props to children - NavBar, CurrentWeather & Weather7Day
 */
-/*
-    401 did not specify api key not activated or wrong
-    404 wrong city name, code or id
-    429 more than 60 api calls per min
-    500, 502, 503, 504 server error contact owm for help+
-*/
+
 import React, { useEffect, useState, useCallback } from 'react';
-import CurrentWeather from '../components/CurrentWeather/CurrentWeather';
-import NavBar from '../components/NavBar/NavBar';
-import Weather7Day from '../components/Weather7Day/Weather7Day';
+import CurrentWeather from '../CurrentWeather/CurrentWeather';
+import NavBar from '../NavBar/NavBar';
+import Weather7Day from '../Weather7Day/Weather7Day';
 import styled, { ThemeProvider } from 'styled-components'
-import GlobalStyle from '../components/GlobalStyle/GlobalStyle';
+import GlobalStyle from '../GlobalStyle/GlobalStyle';
+import { getLatLon, getStateByLatLon, getWeather } from '../../api/Api';
 // npm package to convert full state names to abbreviations //
 import states from 'us-state-converter';
 
@@ -84,8 +80,6 @@ const Weather = () => {
     };
     // DEFINE OTHER VARIABLES //
     const stateAbbr = states.abbr(stateName);
-    const APIKey = process.env.REACT_APP_API_KEY;
-    const baseUrl = 'https://api.openweathermap.org';
 
     // API CALLS AND SET STATE //
     
@@ -93,18 +87,7 @@ const Weather = () => {
         // calls geolocation API and sets lat, lon, city //
         clearVariables()
         if(zip){
-            fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
-                .then(async (res) => {
-                    if(!res.ok) {
-                        const errorData = await res.json();
-                        throw new Error(
-                            errorData.message
-                                ? `Error Code: ${errorData.cod} - ${errorData.message}`
-                                : 'Invalid zip code. Please try again.'
-                        );
-                    }
-                return res.json()
-            })
+            getLatLon(zip)
             .then((data) => {
                 setLat(data.lat)
                 setLon(data.lon)
@@ -114,30 +97,25 @@ const Weather = () => {
                 setError(err.message)
             })
         }   
-    }, [APIKey, zip]);
+    }, [zip]);
 
     const fetchStateByLatLon = useCallback(() => {
         // calls geolocation api (reverse) and sets stateName //
-        
-        let url = `${baseUrl}/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=5&appid=${APIKey}`
+
         if(lat && lon){
-                fetch(url)
-                .then(res => res.json())
+                getStateByLatLon(lat,lon)
                 .then((data) => {
                     setStateName(data[0].state)
-                })
+                }) 
                 .catch((err) => setError(err.message))
         }
-    }, [APIKey, lat, lon]);
+    }, [lat, lon]);
     
     const fetchWeather = useCallback(() => {
         // calls onecall api and sets weather conditions //
         
-        const url = `${baseUrl}/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly,alerts&appid=${APIKey}&units=imperial`
-        
         if(lat && lon){
-            fetch(url)
-            .then(res => res.json())
+            getWeather(lat, lon)
             .then((data) => {
                 setWeather(data.current)
                 setConditions(data.current.weather[0].description)
@@ -146,7 +124,7 @@ const Weather = () => {
                 setWeather7Day(data.daily)
             }).catch((err) => setError(err.message))
         }
-    }, [APIKey, lat, lon]);
+    }, [lat, lon]);
     
     useEffect(() => {
         fetchLatLon()
@@ -181,7 +159,6 @@ const Weather = () => {
         setWeatherCondition(conditionId)
       }, [id]);
 
-   
     return(
         <ThemeProvider theme={themes[weatherCondition]}>
             <GlobalStyle />

@@ -1,7 +1,7 @@
 
 
 import React from 'react';
-import Weather from './api/Weather'
+import Weather from './components/Weather/Weather'
 import styled from 'styled-components'
 
 const StyledApp = styled.div`
