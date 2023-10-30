@@ -12,15 +12,15 @@ describe('Weather Component', () => {
     const props = {
         setZip: jest.fn(),
         setInput: jest.fn(),
-        input: '22980',
+        input: '24401'
     }
-    it('should call the getLatLon function when the button is pressed', async () => {
+    it('should set the zip when the button is pressed', async () => {
         render(<SearchByZipForm {...props}/>)
         await waitFor(() => {
             screen.getByPlaceholderText('Search Zip Code')
         });
-        userEvent.type(screen.getByPlaceholderText('Search Zip Code'), '22980');
+        userEvent.type(screen.getByPlaceholderText('Search Zip Code'), '24401');
         userEvent.click(screen.getByRole('button', {name: ''}));
-        expect(api.getLatLon).toHaveBeenCalledWith('22980')
+        expect(props.setZip).toHaveBeenCalledWith('24401')
     })
 })
