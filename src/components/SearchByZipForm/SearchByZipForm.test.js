@@ -8,14 +8,19 @@ jest.mock('../../api/Api');
 
 describe('Weather Component', () => {
     beforeEach(() => jest.clearAllMocks())
-    
+
+    const props = {
+        setZip: jest.fn(),
+        setInput: jest.fn(),
+        input: '22980',
+    }
     it('should call the getLatLon function when the button is pressed', async () => {
-        render(<SearchByZipForm />)
+        render(<SearchByZipForm {...props}/>)
         await waitFor(() => {
             screen.getByPlaceholderText('Search Zip Code')
         });
         userEvent.type(screen.getByPlaceholderText('Search Zip Code'), '22980');
         userEvent.click(screen.getByRole('button', {name: ''}));
-        expect(api.getLatLon).toBeCalledWith('22980')
+        expect(api.getLatLon).toHaveBeenCalledWith('22980')
     })
 })
