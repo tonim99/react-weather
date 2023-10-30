@@ -120,9 +120,9 @@ const CurrentWeather = ({ weather, conditions, icon, city, stateAbbr }) => {
                 </StyledHeader>}
                 <StyledCurrentWeatherContainer>
                     <StyledCurrentWeather>
-                        <StyledCurrentTemp>{Math.round(weather.temp)} <span>&deg;</span></StyledCurrentTemp>
+                        <StyledCurrentTemp>{Math.round(weather.temp)} <span>&deg;F</span></StyledCurrentTemp>
                         <StyledCurrentConditions>{conditions}</StyledCurrentConditions>
-                        <StyledCurrentFeelsLike>Feels Like {Math.round(weather.feels_like)} <span>&deg;</span></StyledCurrentFeelsLike>
+                        <StyledCurrentFeelsLike>Feels Like {Math.round(weather.feels_like)} <span>&deg;F</span></StyledCurrentFeelsLike>
                     </StyledCurrentWeather>
                     {conditions && <StyledIconContainer>
                         {icon && <StyledWeatherIcon alt='weather-icon' src={`http://openweathermap.org/img/wn/${icon}@4x.png`}/>}
