@@ -2,9 +2,6 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import SearchByZipForm from './SearchByZipForm';
-import * as api from '../../api/Api';
-
-jest.mock('../../api/Api');
 
 describe('Weather Component', () => {
     beforeEach(() => jest.clearAllMocks())
