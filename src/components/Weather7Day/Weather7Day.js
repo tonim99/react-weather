@@ -26,6 +26,7 @@ const StyledForecast = styled.h3`
 const StyledWeatherDailyRow = styled.div`
   display: flex;
   flex-direction: column;
+  padding: 0px 20px;
   
 
   @media ${device.tablet} {
@@ -40,7 +41,10 @@ const StyledWeatherDailyItems = styled.div`
  border-bottom: 1px solid #000000;
  justify-content: space-between;
  align-items: center;
- padding-left: 20px;
+ padding: 5px 0px;
+ &:last-child {
+  border-bottom: none;
+ }
 
   @media ${device.tablet} {
     display: flex;
@@ -57,6 +61,7 @@ const StyledWeekday = styled.div`
   font-weight: bold;
   margin-bottom: 10px;
   width: 25%;
+  margin-top: 10px;
 
   @media ${device.tablet} {
     width: 100%;
