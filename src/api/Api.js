@@ -4,8 +4,8 @@
 const APIKey = process.env.REACT_APP_API_KEY;
 const baseUrl = 'https://api.openweathermap.org';
 
-export const getLatLon = (zip) =>  fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
-    .then(async (res) => {
+export const getLatLon = (zip) => fetch(`${baseUrl}/geo/1.0/zip?zip=${zip}&appid=${APIKey}`)
+.then(async (res) => {
         if(!res.ok) {
             const errorData = await res.json();
             throw new Error(
