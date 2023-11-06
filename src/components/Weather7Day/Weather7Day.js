@@ -52,9 +52,12 @@ const StyledWeatherDailyItems = styled.div`
     width: calc(14.28% - 10px);
     justify-content: center;
     padding: 20px;
-    outline: 1px solid #000000;
+    border: 1px solid #000000;
     border-radius: 8px;
     margin: 5px;
+    &:last-child {
+      border-bottom: 1px solid #000000;
+     }
   }
 `
 const StyledWeekday = styled.div`
