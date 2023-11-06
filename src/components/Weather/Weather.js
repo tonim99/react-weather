@@ -27,26 +27,26 @@ export const themes = {
     default: {
         bg: 'var(--primary-bg-color)',
         bgImage: 'var(--gradient-primary)',
-        navBg: 'var(--primary-bg-color)',
-        searchBg: 'var(--secondary-bg-color)'
+        navBg: 'transparent',
+        searchBg: 'transparent'
     },
     sunny: {
         bg: 'var(--sunny-bg-color)',
         bgImage: 'var(--gradient-sunny)',
         navBg: 'transparent',
-        searchBg: '#D87C33'
+        searchBg: 'transparent'
     },
     cloudy: {
         bg: 'var(--cloudy-bg-color)',
         bgImage: 'var(--gradient-cloudy)',
         navBg: 'transparent',
-        searchBg: '#7E7E7E'
+        searchBg: 'transparent'
     },
     rainy: {
         bg: 'var(--rainy-bg-color)',
         bgImage: 'var(--gradient-rainy)',
         navBg: 'transparent',
-        searchBg: '#415C71'
+        searchBg: 'transparent'
     }
 };
 

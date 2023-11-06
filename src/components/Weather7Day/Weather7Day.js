@@ -2,17 +2,19 @@ import React from 'react'
 import { device } from '../../device.js'
 import styled from 'styled-components'
 
-const StyledWeatherDaily = styled.nav`
+const StyledWeatherDaily = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #ffffff;
-  color: var(--text-color-dark);
+  color: var(--text-color-light);
   align-items: left;
-  backdrop-filter: blur(10px);
-  border-radius: 8px;
   width: 80%;
   margin: 20px auto;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1);
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 `
 
 const StyledForecast = styled.h3`
@@ -37,14 +39,14 @@ const StyledWeatherDailyRow = styled.div`
 `
 
 const StyledWeatherDailyItems = styled.div`
- display: flex;
- border-bottom: 1px solid #000000;
- justify-content: space-between;
- align-items: center;
- padding: 5px 0px;
- &:last-child {
-  border-bottom: none;
- }
+  display: flex;
+  border-bottom: 1px solid #ffffff;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 0px;
+  &:last-child {
+    border-bottom: none;
+  }
 
   @media ${device.tablet} {
     display: flex;
@@ -52,11 +54,11 @@ const StyledWeatherDailyItems = styled.div`
     width: calc(14.28% - 10px);
     justify-content: center;
     padding: 20px;
-    border: 1px solid #000000;
+    border: 1px solid #ffffff;
     border-radius: 8px;
     margin: 5px;
     &:last-child {
-      border-bottom: 1px solid #000000;
+      border-bottom: 1px solid #ffffff;
      }
   }
 `

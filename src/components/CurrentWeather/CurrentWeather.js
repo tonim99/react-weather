@@ -16,17 +16,19 @@ const StyledCurrentWeatherCard = styled.div`
     align-items: center;
     width: 80%;
     margin: 20px auto;
-    background-color: #ffffff;
-    color: var(--text-color-dark);
-    border-radius: 8px;
-    box-shadow: 0 1px 5px rgba(0,0,0,0.25), 0 0 50px rgba(0,0,0,0.1);
+    color: var(--text-color-light);
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
 `
 
 const StyledHeader = styled.header`
     display: flex;
     justify-content: center;
     width: 100%;
-    background-color: #ffffff;
     height: 32px;
     padding: 12px 0px;
     border-top-right-radius: 8px;
