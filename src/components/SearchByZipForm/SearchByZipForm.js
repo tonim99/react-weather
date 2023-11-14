@@ -53,27 +53,19 @@ const StyledButton = styled.button`
 const SearchByZipForm = ({ setZip, input, setInput }) => {
 
     const changeZip = (e) => {
-        e.preventDefault()
-        setZip(input)
+        try{
+            e.preventDefault()
+            setZip(input)
+        } catch(error) {
+            return <div>{error.message}</div>
+        }finally{
+            setInput('')
+        }
+
     }
 
-    /* TODO:
-
-     handleSubmit() should clear the input after promises are 
-     resolved and zip is set. 
-     Currently clears input before zip is set and the 
-     API call is not made because the zip code is an empty
-     string.
-
-    */
-
-    // const handleSubmit = (e) => {
-    //     e.preventDefault()
-    //     setInput('')
-    // }
-
     return(
-        <StyledForm onSubmit={(e) => changeZip(e)}>
+        <StyledForm onSubmit={changeZip}>
             <StyledInputContainer className="input-container">
                 <StyledInput 
                     type='text'
